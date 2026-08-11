@@ -1,0 +1,37 @@
+"use strict";
+
+const test = require("node:test");
+const assert = require("node:assert/strict");
+const { signSession, verifySession } = require("../session-token");
+const { getIntegration, isAllowedOrigin, normalizeOrigin } = require("../integrations");
+
+const secret = "test-secret-that-is-long-enough-for-hmac-signing";
+
+test("session token round-trips and preserves origin", () => {
+  const token = signSession({ appKey: "petipeti", origin: "https://peti-peti.com" }, secret, 1800, 1000);
+  const payload = verifySession(token, secret, 1100);
+  assert.equal(payload.appKey, "petipeti");
+  assert.equal(payload.origin, "https://peti-peti.com");
+});
+
+test("expired session token is rejected", () => {
+  const token = signSession({ appKey: "petipeti", origin: "https://peti-peti.com" }, secret, 10, 1000);
+  assert.throws(() => verifySession(token, secret, 1011), /expired/i);
+});
+
+test("tampered session token is rejected", () => {
+  const token = signSession({ appKey: "petipeti", origin: "https://peti-peti.com" }, secret, 1800, 1000);
+  assert.throws(() => verifySession(`${token}x`, secret, 1100), /signature|token/i);
+});
+
+test("Peti-Peti origins and localhost are allowed", () => {
+  const integration = getIntegration("petipeti");
+  assert.equal(isAllowedOrigin(integration, "https://peti-peti.com"), true);
+  assert.equal(isAllowedOrigin(integration, "http://localhost:8080"), true);
+  assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
+});
+
+test("origin normalization drops paths and normalizes case", () => {
+  assert.equal(normalizeOrigin("HTTPS://PETI-PETI.COM/some/page"), "https://peti-peti.com");
+});
+

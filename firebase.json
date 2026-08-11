@@ -1,0 +1,41 @@
+{
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs22"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "/widget.js",
+        "headers": [
+          { "key": "Access-Control-Allow-Origin", "value": "*" },
+          { "key": "Cache-Control", "value": "public, max-age=300" }
+        ]
+      },
+      {
+        "source": "/chat.html",
+        "headers": [
+          { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors *; base-uri 'none'; form-action 'self'" },
+          { "key": "Referrer-Policy", "value": "no-referrer" },
+          { "key": "X-Content-Type-Options", "value": "nosniff" }
+        ]
+      }
+    ],
+    "rewrites": [
+      { "source": "/api/session", "function": { "functionId": "aiPanduSession", "region": "us-central1" } },
+      { "source": "/api/config", "function": { "functionId": "aiPanduConfig", "region": "us-central1" } },
+      { "source": "/api/chat", "function": { "functionId": "aiPanduChat", "region": "us-central1" } }
+    ]
+  },
+  "emulators": {
+    "functions": { "port": 5016 },
+    "hosting": { "port": 5015 },
+    "ui": { "enabled": true, "port": 4015 }
+  }
+}

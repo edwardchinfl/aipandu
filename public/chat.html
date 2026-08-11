@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>aiPandu</title>
+  <link rel="stylesheet" href="/chat.css">
+</head>
+<body>
+  <main class="app" aria-busy="true">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">P</div>
+      <div>
+        <h1>aiPandu</h1>
+        <p id="product-name">Your practical guide</p>
+      </div>
+      <button id="close-btn" class="icon-btn" type="button" aria-label="Close aiPandu">×</button>
+    </header>
+
+    <section id="messages" class="messages" aria-live="polite" aria-label="Conversation"></section>
+    <section id="suggestions" class="suggestions" aria-label="Suggested questions"></section>
+
+    <form id="chat-form" class="composer">
+      <label class="sr-only" for="question">Ask aiPandu</label>
+      <textarea id="question" rows="1" maxlength="1200" placeholder="Ask a question…" disabled></textarea>
+      <button id="send-btn" type="submit" disabled aria-label="Send question">➜</button>
+    </form>
+    <p class="notice">Answers are based on the selected help documents.</p>
+  </main>
+  <script src="/chat.js" defer></script>
+</body>
+</html>
+

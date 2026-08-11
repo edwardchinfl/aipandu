@@ -1,0 +1,12 @@
+{
+  "name": "aipandu",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "npm --prefix functions test",
+    "serve": "firebase emulators:start --only hosting,functions",
+    "deploy:preview": "firebase hosting:channel:deploy preview --project aipandu",
+    "deploy": "firebase deploy --project aipandu --only hosting,functions"
+  }
+}
+

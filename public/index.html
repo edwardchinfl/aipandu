@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="aiPandu is an embeddable, source-grounded help assistant.">
+  <title>aiPandu — Help, where it is needed</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#e2e8f0;background:#07151b}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 75% 10%,rgba(20,184,166,.18),transparent 28%),linear-gradient(145deg,#07151b,#0f2530 65%,#102f35)}
+    main{width:min(1060px,calc(100% - 40px));margin:auto;padding:72px 0 100px}.eyebrow{color:#5eead4;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:12px}h1{max-width:790px;margin:18px 0;font-size:clamp(48px,8vw,92px);line-height:.94;letter-spacing:-.055em}.accent{color:#5eead4}p{max-width:680px;color:#b5c7d1;font-size:clamp(18px,2vw,23px);line-height:1.55}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:52px}.card{padding:22px;border:1px solid rgba(148,163,184,.2);border-radius:20px;background:rgba(255,255,255,.055);backdrop-filter:blur(12px)}.card b{display:block;margin-bottom:8px;color:#f8fafc}.card span{color:#9eb2bd;line-height:1.5}.hint{margin-top:34px;color:#7dd3fc;font-size:14px}@media(max-width:760px){main{padding-top:46px}.cards{grid-template-columns:1fr}h1{font-size:52px}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">An answer, in context</div>
+    <h1>Meet <span class="accent">aiPandu</span>, your guide inside the app.</h1>
+    <p>aiPandu retrieves guidance approved for the application you are using, then gives a practical answer with the supporting sources.</p>
+    <section class="cards">
+      <div class="card"><b>Embedded</b><span>Launch from the bottom-right corner without leaving the current application.</span></div>
+      <div class="card"><b>Grounded</b><span>Answers come from the RAG documents assigned to that application.</span></div>
+      <div class="card"><b>Portable</b><span>The same secure widget can support Peti-Peti and approved external applications.</span></div>
+    </section>
+    <p class="hint">The Peti-Peti demo launcher will appear at the bottom right when this page is opened from an allowed development origin.</p>
+  </main>
+  <script src="/widget.js" data-app-key="petipeti" defer></script>
+</body>
+</html>
+
