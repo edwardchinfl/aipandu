@@ -3,7 +3,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const { signSession, verifySession } = require("../session-token");
-const { getIntegration, isAllowedOrigin, normalizeOrigin } = require("../integrations");
+const { getIntegration, isAllowedOrigin, normalizeOrigin, publicIntegrationConfig } = require("../integrations");
 
 const secret = "test-secret-that-is-long-enough-for-hmac-signing";
 
@@ -30,6 +30,20 @@ test("Peti-Peti origins and localhost are allowed", () => {
   assert.equal(isAllowedOrigin(integration, "https://peti-peti--aipandu-test-20260811-gx0bzksx.web.app"), true);
   assert.equal(isAllowedOrigin(integration, "http://localhost:8080"), true);
   assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
+});
+
+test("aiCEKAP origins and localhost are allowed", () => {
+  const integration = getIntegration("aicekap");
+  assert.equal(isAllowedOrigin(integration, "https://aicekap.com"), true);
+  assert.equal(isAllowedOrigin(integration, "https://aicekap2026.web.app"), true);
+  assert.equal(isAllowedOrigin(integration, "https://aicekap2026--aipandu-learner-20260811-awv24duq.web.app"), true);
+  assert.equal(isAllowedOrigin(integration, "http://localhost"), true);
+  assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
+  assert.equal(publicIntegrationConfig(integration).showSources, false);
+});
+
+test("Peti-Peti sources are suppressed", () => {
+  assert.equal(publicIntegrationConfig(getIntegration("petipeti")).showSources, false);
 });
 
 test("origin normalization drops paths and normalizes case", () => {

@@ -130,11 +130,11 @@ function buildContext(results) {
   }).join("\n\n");
 }
 
-function buildInput(query, history, context) {
+function buildInput(query, history, context, productName) {
   const recent = history.length
     ? history.map(item => `${item.role === "assistant" ? "Assistant" : "User"}: ${item.content}`).join("\n")
     : "No earlier conversation.";
-  return `Recent conversation:\n${recent}\n\nUser question:\n${query}\n\nRetrieved Peti-Peti guidance:\n${context}`;
+  return `Recent conversation:\n${recent}\n\nUser question:\n${query}\n\nRetrieved ${productName} guidance:\n${context}`;
 }
 
 function citationList(results) {
@@ -211,6 +211,9 @@ exports.aiPanduChat = onRequest({
     }
     const openai = new OpenAI({ apiKey: OPENAI_API_KEY.value() });
     const safetyIdentifier = crypto.createHash("sha256").update(`${session.appKey}|${session.origin}`).digest("hex").slice(0, 64);
+    const sourceInstruction = integration.showSources === false
+      ? "Do not add citation numbers or source markers to the answer."
+      : "Cite supporting passages using [1], [2], and so on.";
     const response = await openai.responses.create({
       model: MODEL,
       store: false,
@@ -218,14 +221,14 @@ exports.aiPanduChat = onRequest({
       text: { verbosity: "medium" },
       max_output_tokens: 900,
       safety_identifier: safetyIdentifier,
-      instructions: `You are aiPandu, a practical guide for ${integration.productName}. Answer only from the retrieved guidance. Give direct, numbered steps when the user asks how to do something. Explain which box to select and which menu path to use when relevant. Cite supporting passages using [1], [2], and so on. If the guidance does not contain the answer, say so plainly and ask one useful follow-up question. Do not invent controls, access rules, or product behaviour.`,
-      input: buildInput(query, history, buildContext(results))
+      instructions: `You are aiPandu, a practical guide for ${integration.productName}. Answer only from the retrieved guidance. Give direct, numbered steps when the user asks how to do something. Explain which menu or learner area to use when relevant. ${sourceInstruction} If the guidance does not contain the answer, say so plainly and ask one useful follow-up question. Do not invent controls, access rules, or product behaviour. ${integration.scopeInstruction || ""}`.trim(),
+      input: buildInput(query, history, buildContext(results), integration.productName)
     });
     const answer = String(response.output_text || "").trim();
     if (!answer) throw new Error("The model returned an empty answer.");
     return sendJson(res, 200, {
       answer,
-      citations: citationList(results),
+      citations: integration.showSources === false ? [] : citationList(results),
       knowledgeBaseId: integration.knowledgeBaseId,
       model: MODEL
     });

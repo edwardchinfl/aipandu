@@ -28,7 +28,7 @@
     const text = document.createElement("div");
     text.textContent = content;
     item.appendChild(text);
-    if (Array.isArray(options.citations) && options.citations.length) {
+    if (config?.showSources !== false && Array.isArray(options.citations) && options.citations.length) {
       const sourceBox = document.createElement("div");
       sourceBox.className = "sources";
       const label = document.createElement("b");
@@ -168,4 +168,3 @@
 
   postToParent({ type: "aipandu:ready" });
 })();
-
