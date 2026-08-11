@@ -27,6 +27,7 @@
       .panel.open{opacity:1;transform:none;pointer-events:auto}
       iframe{display:block;width:100%;height:100%;border:0;background:#f8fafc}
       .status{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:#475569;background:#f8fafc;font:600 14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      .status[hidden]{display:none}
       @media(max-width:520px){.launcher{right:14px;bottom:14px}.panel{right:0;bottom:0;width:100vw;height:100dvh;border-radius:0}}
       @media(prefers-reduced-motion:reduce){.launcher,.panel{transition:none}}
     </style>
@@ -123,4 +124,3 @@
     }
   };
 })();
-
