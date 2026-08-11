@@ -3,7 +3,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const { signSession, verifySession } = require("../session-token");
-const { getIntegration, isAllowedOrigin, normalizeOrigin } = require("../integrations");
+const { getIntegration, isAllowedOrigin, normalizeOrigin, publicIntegrationConfig } = require("../integrations");
 
 const secret = "test-secret-that-is-long-enough-for-hmac-signing";
 
@@ -39,6 +39,11 @@ test("aiCEKAP origins and localhost are allowed", () => {
   assert.equal(isAllowedOrigin(integration, "https://aicekap2026--aipandu-learner-20260811-awv24duq.web.app"), true);
   assert.equal(isAllowedOrigin(integration, "http://localhost"), true);
   assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
+  assert.equal(publicIntegrationConfig(integration).showSources, false);
+});
+
+test("Peti-Peti sources remain visible", () => {
+  assert.equal(publicIntegrationConfig(getIntegration("petipeti")).showSources, true);
 });
 
 test("origin normalization drops paths and normalizes case", () => {

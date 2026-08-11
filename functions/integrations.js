@@ -63,6 +63,7 @@ const INTEGRATIONS = Object.freeze({
     productName: "aiCEKAP",
     assistantName: "aiPandu",
     knowledgeBaseId: "aicekap-learner-help",
+    showSources: false,
     welcomeMessage: "Hello! I can help you use aiCEKAP as a learner—from choosing a mission to improving your prompt and understanding your progress.",
     placeholder: "Ask how to learn with aiCEKAP…",
     suggestions: Object.freeze([
@@ -122,6 +123,7 @@ function publicIntegrationConfig(integration) {
     productName: integration.productName,
     assistantName: integration.assistantName,
     knowledgeBaseId: integration.knowledgeBaseId,
+    showSources: integration.showSources !== false,
     welcomeMessage: integration.welcomeMessage,
     placeholder: integration.placeholder,
     suggestions: [...integration.suggestions]
