@@ -30,6 +30,7 @@ const INTEGRATIONS = Object.freeze({
       "https://www.peti-peti.com",
       "https://nestedboxes-99ea8.web.app",
       "https://nestedboxes-99ea8.firebaseapp.com",
+      "https://peti-peti--aipandu-test-20260811-gx0bzksx.web.app",
       "https://aipandu.web.app",
       "https://aipandu.firebaseapp.com"
     ]),

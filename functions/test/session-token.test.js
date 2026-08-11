@@ -27,6 +27,7 @@ test("tampered session token is rejected", () => {
 test("Peti-Peti origins and localhost are allowed", () => {
   const integration = getIntegration("petipeti");
   assert.equal(isAllowedOrigin(integration, "https://peti-peti.com"), true);
+  assert.equal(isAllowedOrigin(integration, "https://peti-peti--aipandu-test-20260811-gx0bzksx.web.app"), true);
   assert.equal(isAllowedOrigin(integration, "http://localhost:8080"), true);
   assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
 });
@@ -34,4 +35,3 @@ test("Peti-Peti origins and localhost are allowed", () => {
 test("origin normalization drops paths and normalizes case", () => {
   assert.equal(normalizeOrigin("HTTPS://PETI-PETI.COM/some/page"), "https://peti-peti.com");
 });
-
