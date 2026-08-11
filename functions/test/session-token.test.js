@@ -32,6 +32,14 @@ test("Peti-Peti origins and localhost are allowed", () => {
   assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
 });
 
+test("aiCEKAP origins and localhost are allowed", () => {
+  const integration = getIntegration("aicekap");
+  assert.equal(isAllowedOrigin(integration, "https://aicekap.com"), true);
+  assert.equal(isAllowedOrigin(integration, "https://aicekap2026.web.app"), true);
+  assert.equal(isAllowedOrigin(integration, "http://localhost"), true);
+  assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
+});
+
 test("origin normalization drops paths and normalizes case", () => {
   assert.equal(normalizeOrigin("HTTPS://PETI-PETI.COM/some/page"), "https://peti-peti.com");
 });

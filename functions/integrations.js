@@ -12,6 +12,17 @@ const PETIPETI_DOCUMENT_IDS = Object.freeze([
   "ttinfo_petipeti_troubleshooting_faq_v1"
 ]);
 
+const AICEKAP_LEARNER_DOCUMENT_IDS = Object.freeze([
+  "aipandu_aicekap_getting_started_v1",
+  "aipandu_aicekap_cekap_framework_v1",
+  "aipandu_aicekap_missions_selection_v1",
+  "aipandu_aicekap_execution_feedback_v1",
+  "aipandu_aicekap_scores_progress_v1",
+  "aipandu_aicekap_games_workshops_guides_v1",
+  "aipandu_aicekap_access_troubleshooting_v1",
+  "aipandu_aicekap_learner_faq_v1"
+]);
+
 const INTEGRATIONS = Object.freeze({
   petipeti: Object.freeze({
     appKey: "petipeti",
@@ -41,6 +52,40 @@ const INTEGRATIONS = Object.freeze({
       tenantId: "ttinfo",
       visibilityScope: Object.freeze(["global", "app", "tenant"]),
       docIds: PETIPETI_DOCUMENT_IDS,
+      topK: 6,
+      maxDocuments: 4,
+      maxChunksPerDocument: 3,
+      maxRetrievedTokens: 6500
+    })
+  }),
+  aicekap: Object.freeze({
+    appKey: "aicekap",
+    productName: "aiCEKAP",
+    assistantName: "aiPandu",
+    knowledgeBaseId: "aicekap-learner-help",
+    welcomeMessage: "Hello! I can help you use aiCEKAP as a learner—from choosing a mission to improving your prompt and understanding your progress.",
+    placeholder: "Ask how to learn with aiCEKAP…",
+    suggestions: Object.freeze([
+      "How do I complete my first mission?",
+      "How can I improve a low CEKAP score?",
+      "Why is my next stage still locked?"
+    ]),
+    allowedOrigins: Object.freeze([
+      "https://aicekap.com",
+      "https://www.aicekap.com",
+      "https://aicekap2026.web.app",
+      "https://aicekap2026.firebaseapp.com",
+      "https://aipandu.web.app",
+      "https://aipandu.firebaseapp.com"
+    ]),
+    allowLocalhost: true,
+    scopeInstruction: "Support learners only. Do not provide procedures for admin settings, user approvals, company configuration, mission publishing, analytics, RAG management, Firestore, deployments, permissions, tokens, or API keys. If asked about one of those topics, explain that this learner guide does not cover it and direct the user to their facilitator or system administrator.",
+    rag: Object.freeze({
+      endpoint: "https://us-central1-nestedboxes-99ea8.cloudfunctions.net/ragRetrieve",
+      appId: "aipandu",
+      tenantId: "aicekap",
+      visibilityScope: Object.freeze(["global", "app", "tenant"]),
+      docIds: AICEKAP_LEARNER_DOCUMENT_IDS,
       topK: 6,
       maxDocuments: 4,
       maxChunksPerDocument: 3,
@@ -84,6 +129,7 @@ function publicIntegrationConfig(integration) {
 
 module.exports = {
   INTEGRATIONS,
+  AICEKAP_LEARNER_DOCUMENT_IDS,
   PETIPETI_DOCUMENT_IDS,
   getIntegration,
   isAllowedOrigin,
