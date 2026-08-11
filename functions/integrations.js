@@ -75,6 +75,7 @@ const INTEGRATIONS = Object.freeze({
       "https://www.aicekap.com",
       "https://aicekap2026.web.app",
       "https://aicekap2026.firebaseapp.com",
+      "https://aicekap2026--aipandu-learner-20260811-awv24duq.web.app",
       "https://aipandu.web.app",
       "https://aipandu.firebaseapp.com"
     ]),

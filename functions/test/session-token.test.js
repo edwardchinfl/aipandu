@@ -36,6 +36,7 @@ test("aiCEKAP origins and localhost are allowed", () => {
   const integration = getIntegration("aicekap");
   assert.equal(isAllowedOrigin(integration, "https://aicekap.com"), true);
   assert.equal(isAllowedOrigin(integration, "https://aicekap2026.web.app"), true);
+  assert.equal(isAllowedOrigin(integration, "https://aicekap2026--aipandu-learner-20260811-awv24duq.web.app"), true);
   assert.equal(isAllowedOrigin(integration, "http://localhost"), true);
   assert.equal(isAllowedOrigin(integration, "https://example.com"), false);
 });
