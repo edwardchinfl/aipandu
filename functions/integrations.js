@@ -9,7 +9,8 @@ const PETIPETI_DOCUMENT_IDS = Object.freeze([
   "ttinfo_petipeti_borders_spacing_corners_shadows_v1",
   "ttinfo_petipeti_moving_reorganising_boxes_v1",
   "ttinfo_petipeti_saving_opening_sharing_exporting_v1",
-  "ttinfo_petipeti_troubleshooting_faq_v1"
+  "ttinfo_petipeti_troubleshooting_faq_v1",
+  "ttinfo_petipeti_ai_menu_v1"
 ]);
 
 const AICEKAP_LEARNER_DOCUMENT_IDS = Object.freeze([
