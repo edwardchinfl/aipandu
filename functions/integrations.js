@@ -29,6 +29,7 @@ const INTEGRATIONS = Object.freeze({
     productName: "Peti-Peti",
     assistantName: "aiPandu",
     knowledgeBaseId: "petipeti-help",
+    showSources: false,
     welcomeMessage: "Hello! I can guide you through Peti-Peti—boxes, layouts, colours, fonts, saving, sharing and more.",
     placeholder: "Ask how to use Peti-Peti…",
     suggestions: Object.freeze([

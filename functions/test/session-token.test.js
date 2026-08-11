@@ -42,8 +42,8 @@ test("aiCEKAP origins and localhost are allowed", () => {
   assert.equal(publicIntegrationConfig(integration).showSources, false);
 });
 
-test("Peti-Peti sources remain visible", () => {
-  assert.equal(publicIntegrationConfig(getIntegration("petipeti")).showSources, true);
+test("Peti-Peti sources are suppressed", () => {
+  assert.equal(publicIntegrationConfig(getIntegration("petipeti")).showSources, false);
 });
 
 test("origin normalization drops paths and normalizes case", () => {
