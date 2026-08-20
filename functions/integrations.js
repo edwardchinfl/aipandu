@@ -39,6 +39,8 @@ const INTEGRATIONS = Object.freeze({
     allowedOrigins: Object.freeze([
       "https://peti-peti.com",
       "https://www.peti-peti.com",
+      "https://peti-peti.web.app",
+      "https://peti-peti.firebaseapp.com",
       "https://nestedboxes-99ea8.web.app",
       "https://nestedboxes-99ea8.firebaseapp.com",
       "https://peti-peti--aipandu-test-20260811-gx0bzksx.web.app",
