@@ -12,6 +12,17 @@ const PETIPETI_DOCUMENT_IDS = Object.freeze([
   "ttinfo_petipeti_troubleshooting_faq_v1"
 ]);
 
+const AICEKAP_DOCUMENT_IDS = Object.freeze([
+  "aipandu_aicekap_getting_started_v1",
+  "aipandu_aicekap_creating_missions_v1",
+  "aipandu_aicekap_prompt_engineering_v1",
+  "aipandu_aicekap_generating_questions_v1",
+  "aipandu_aicekap_pathways_v1",
+  "aipandu_aicekap_students_classes_v1",
+  "aipandu_aicekap_assessments_scoring_v1",
+  "aipandu_aicekap_troubleshooting_faq_v1"
+]);
+
 const INTEGRATIONS = Object.freeze({
   petipeti: Object.freeze({
     appKey: "petipeti",
@@ -31,16 +42,56 @@ const INTEGRATIONS = Object.freeze({
       "https://nestedboxes-99ea8.web.app",
       "https://nestedboxes-99ea8.firebaseapp.com",
       "https://peti-peti--aipandu-test-20260811-gx0bzksx.web.app",
+      "https://peti-peti--hosting-boundaries-20260820-tkz92rk4.web.app",
       "https://aipandu.web.app",
       "https://aipandu.firebaseapp.com"
     ]),
     allowLocalhost: true,
     rag: Object.freeze({
       endpoint: "https://us-central1-nestedboxes-99ea8.cloudfunctions.net/ragRetrieve",
-      appId: "ttinfochat",
+      appId: "petipeti-aipandu",
       tenantId: "ttinfo",
       visibilityScope: Object.freeze(["global", "app", "tenant"]),
       docIds: PETIPETI_DOCUMENT_IDS,
+      topK: 6,
+      maxDocuments: 4,
+      maxChunksPerDocument: 3,
+      maxRetrievedTokens: 6500
+    })
+  }),
+  aicekap: Object.freeze({
+    appKey: "aicekap",
+    productName: "aiCEKAP",
+    assistantName: "aiPandu",
+    knowledgeBaseId: "aicekap-help",
+    welcomeMessage: "Hello! I can guide you through aiCEKAP—creating missions, generating questions, managing classes, assessments, and more.",
+    placeholder: "Ask how to use aiCEKAP…",
+    suggestions: Object.freeze([
+      "How do I create a new mission?",
+      "How do I generate questions from prompts?",
+      "How do I set up student classes?"
+    ]),
+    allowedOrigins: Object.freeze([
+      "https://aicekap.com",
+      "https://www.aicekap.com",
+      "https://aicekap.web.app",
+      "https://aicekap.firebaseapp.com",
+      "https://aicekap2026.web.app",
+      "https://aicekap2026.firebaseapp.com",
+      "https://aicekap-36e3b.web.app",
+      "https://aicekap-36e3b.firebaseapp.com",
+      "https://aicekap2026--hosting-boundaries-20260820-0kbtqucz.web.app",
+      "https://peti-peti-test.web.app",
+      "https://peti-peti-test.firebaseapp.com",
+      "https://peti-peti-test--hosting-boundaries-20260820-kf97en2l.web.app"
+    ]),
+    allowLocalhost: true,
+    rag: Object.freeze({
+      endpoint: "https://us-central1-nestedboxes-99ea8.cloudfunctions.net/ragRetrieve",
+      appId: "aicekap-aipandu",
+      tenantId: "ttinfo",
+      visibilityScope: Object.freeze(["global", "app", "tenant"]),
+      docIds: AICEKAP_DOCUMENT_IDS,
       topK: 6,
       maxDocuments: 4,
       maxChunksPerDocument: 3,
@@ -85,6 +136,7 @@ function publicIntegrationConfig(integration) {
 module.exports = {
   INTEGRATIONS,
   PETIPETI_DOCUMENT_IDS,
+  AICEKAP_DOCUMENT_IDS,
   getIntegration,
   isAllowedOrigin,
   normalizeOrigin,
