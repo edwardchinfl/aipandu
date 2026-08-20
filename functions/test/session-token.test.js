@@ -37,6 +37,15 @@ test("Peti-Peti origins and localhost are allowed", () => {
 test("aiCEKAP uses its dedicated RAG app and allows localhost", () => {
   const integration = getIntegration("aicekap");
   assert.equal(integration.rag.appId, "aicekap-aipandu");
+  assert.equal(
+    integration.welcomeMessage,
+    "Hello! I’m aiPandu, your aiCekap guide. I can help you understand your missions, build better prompts, interpret your scores and get more value from AI as your thinking partner."
+  );
+  assert.deepEqual(integration.suggestions, [
+    "How can I write a better CEKAP prompt?",
+    "What do my score and feedback mean?",
+    "Can you help me understand this mission?"
+  ]);
   assert.equal(isAllowedOrigin(integration, "https://aicekap.com"), true);
   assert.equal(isAllowedOrigin(integration, "https://aicekap2026.web.app"), true);
   assert.equal(isAllowedOrigin(integration, "https://aicekap2026--hosting-boundaries-20260820-0kbtqucz.web.app"), true);

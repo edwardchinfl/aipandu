@@ -64,12 +64,12 @@ const INTEGRATIONS = Object.freeze({
     productName: "aiCEKAP",
     assistantName: "aiPandu",
     knowledgeBaseId: "aicekap-help",
-    welcomeMessage: "Hello! I can guide you through aiCEKAP—creating missions, generating questions, managing classes, assessments, and more.",
+    welcomeMessage: "Hello! I’m aiPandu, your aiCekap guide. I can help you understand your missions, build better prompts, interpret your scores and get more value from AI as your thinking partner.",
     placeholder: "Ask how to use aiCEKAP…",
     suggestions: Object.freeze([
-      "How do I create a new mission?",
-      "How do I generate questions from prompts?",
-      "How do I set up student classes?"
+      "How can I write a better CEKAP prompt?",
+      "What do my score and feedback mean?",
+      "Can you help me understand this mission?"
     ]),
     allowedOrigins: Object.freeze([
       "https://aicekap.com",
